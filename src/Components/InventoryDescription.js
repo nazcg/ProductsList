@@ -16,7 +16,7 @@ const [brand, setBrand] = useState("");
             setPImage(estado.Children[0].Imgs[0].Path);
             setTitle(estado.Name);
             setDescription(estado.Description);
-            setPrice(estado.Children[0].Price);
+            setPrice(estado.Children[0].Price + " $");
             setBrand(estado.Brand);
             console.log(estado);
         }else{
@@ -27,6 +27,7 @@ const [brand, setBrand] = useState("");
 
     return(
         <div class ="container">
+            
             <div class="card" style={{width: '100%'}}>
                 <img class="card-img-top" src={pimage}/>
                 <div class="card-body">

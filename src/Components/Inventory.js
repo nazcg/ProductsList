@@ -110,10 +110,7 @@ function Inventory (props){
     return(
         
 <div className="container">
-    <button className="btn btn-primary" value ="regresar" onClick ={Products}>Regresar</button>
-    <button className="btn btn-primary" value ="dulces" onClick ={btnShowCategory}>Dulces</button>
-    <button className="btn btn-primary" value ="bebidas" onClick ={btnShowCategory}>Bebidas</button>
-    <button className="btn btn-primary" value ="alcohol"onClick ={btnShowCategory}>Alcohol</button>
+ 
 <div className="input-group mb-3">
   <div className="input-group-prepend">
     <span className="input-group-text" id="basic-addon1">Filtrar</span>
@@ -125,11 +122,16 @@ function Inventory (props){
      onChange ={handleInputChange}
   />
 
+    <button className="btn btn-outline-primary" value ="regresar" onClick ={Products}>Regresar</button>
+    <button className="btn btn-outline-primary" value ="dulces" onClick ={btnShowCategory}>Dulces</button>
+    <button className="btn btn-outline-primary" value ="bebidas" onClick ={btnShowCategory}>Bebidas</button>
+    <button className="btn btn-outline-primary" value ="alcohol"onClick ={btnShowCategory}>Alcohol</button>
+
 </div>
         <div className="row">
             {arrayProducts !== undefined ? arrayProducts.filter(product=> product.Name.toLowerCase().substring(0, filtro.objeto.length) === filtro.objeto.toLowerCase()).map((product, index)  => {
                 return (                  
-                    <div className="col-3 p-2" key={product._id}>
+                    <div className="col-4 p-3" key={product._id}>
                         <div className="card" style={{width: '100%'}}>
                             <div className="card-img-top">
                                  
@@ -141,10 +143,12 @@ function Inventory (props){
                             <p className="font-weight-bold">Price: {product.Children[0].Price} $</p>
                             {footer?
                             <div>
-                            <button className="btn btn-primary" onClick ={()=>btnDetail(product)}>Ver mas</button>
-                            <button className="btn btn-primary" onClick ={()=>Dulce(index)}>Dulces</button>
-                            <button className="btn btn-primary" onClick ={()=>Bebida(index)}>Bebidas</button>
-                            <button className="btn btn-primary" onClick ={()=>Alcohol(index)}>Alcohol</button>
+                            
+                            <button className="btn btn-outline-primary ml-5 mr-3" onClick ={()=>Dulce(index)}>Dulces</button>
+                            <button className="btn btn-outline-primary ml-5 mr-3" onClick ={()=>Bebida(index)}>Bebidas</button>
+                            <button className="btn btn-outline-primary ml-5 mr-3" onClick ={()=>Alcohol(index)}>Alcohol</button>
+                            <button class="btn btn-outline-success" onClick ={()=>btnDetail(product)}>Ver mas</button>
+
                             </div>:console.log(footer)}
                             
                             </div>

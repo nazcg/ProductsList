@@ -12,7 +12,7 @@ function App() {
     <div className="container pt-4">
 
        <Route exact path ='/'   component = {Inventory} />
-       <Route exact path ='/indexDescription'   component = {InventoryDescription} />
+       <Route exact path ='/InventoryDescription'   component = {InventoryDescription} />
    </div>
 
  </Router>
