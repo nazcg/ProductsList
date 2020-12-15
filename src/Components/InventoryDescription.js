@@ -26,20 +26,34 @@ const [brand, setBrand] = useState("");
     }, [props.location.state]);
 
     return(
-        <div class ="container">
+        <div  align = "center" class ="container">
             
-            <div class="card" style={{width: '100%'}}>
-                <img class="card-img-top" src={pimage}/>
+            <div class="card text-white bg-dark" style={{width: '40%'}}>
+            <div class="card-body">
+                    <h1 class="card-title">{title.toUpperCase()}</h1>
+                <img class="card-img-top" src={pimage} style={{width: '90%'}}/>
                 <div class="card-body">
-                    <h5 class="card-title">{title.toUpperCase()}</h5>
-                    <p class="card-text">{description}</p>
+                    <p class="card-text" style={{fontSize: '35px'}}>{description}</p>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{brand}</li>
-                    <li class="list-group-item">{price}</li>
-                </ul>
+                <div class="row" style={{fontSize: '30px'}}>
+
+                    <div class="col-12">
+
+                        <label class="">{brand}</label>
+                        
+                    </div>
+
+                    <div class="col-12">
+                        
+                        <label class="">{price}</label>
+                        
+                    </div>
+
+                </div>
+                
                 <div class="card-body">
-                    <a href="#" class="card-link">Agregrar al Carrito</a>
+                    <a href="#" class="btn btn-outline-light">Agregrar al Carrito</a>
+                </div>
                 </div>
             </div>
         </div>

@@ -14,6 +14,15 @@ function Inventory (props){
     const [alcohol, setAlcohol] = useState([]);
     const [arrayProducts, setArrayProducts] = useState();
 
+    useEffect(() => {
+        axios
+          .get("https://pz8cvzu4sl.execute-api.us-east-1.amazonaws.com/dev/product-ms/product/getProductByIdCompany?id=5e8d08fafd3f3d2eb89c5063")
+          .then(response => {setItems(response.data);
+                            setArrayProducts(response.data);
+        });
+
+      }, []);
+
     const btnDetail = (product) => {
         const pdpProduct = product;
         props.history.push({
@@ -97,58 +106,63 @@ function Inventory (props){
 
     }
     // console.log(filtro.objeto);
-    useEffect(() => {
-        axios
-          .get("https://pz8cvzu4sl.execute-api.us-east-1.amazonaws.com/dev/product-ms/product/getProductByIdCompany?id=5e8d08fafd3f3d2eb89c5063")
-          .then(response => {setItems(response.data);
-                            setArrayProducts(response.data);
-        });
 
-      }, []);
 
       console.log(dulces);
     return(
         
-<div className="container">
- 
-<div className="input-group mb-3">
-  <div className="input-group-prepend">
-    <span className="input-group-text" id="basic-addon1">Filtrar</span>
-  </div>
-  <input 
-    type="text" 
-    class="form-control"
-    name="objeto"
-     onChange ={handleInputChange}
-  />
+        <div className="container">
+            <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                    <span className="input-group-text" id="basic-addon1">Filtrar</span>
+                </div>
+                <input 
+                    type="text" 
+                    class="form-control"
+                    name="objeto"
+                    onChange ={handleInputChange}
+                 />
 
-    <button className="btn btn-outline-primary" value ="regresar" onClick ={Products}>Regresar</button>
-    <button className="btn btn-outline-primary" value ="dulces" onClick ={btnShowCategory}>Dulces</button>
-    <button className="btn btn-outline-primary" value ="bebidas" onClick ={btnShowCategory}>Bebidas</button>
-    <button className="btn btn-outline-primary" value ="alcohol"onClick ={btnShowCategory}>Alcohol</button>
+                <button className="btn btn-outline-primary" value ="regresar" onClick ={Products}>Regresar</button>
+                <button className="btn btn-outline-primary" value ="dulces" onClick ={btnShowCategory}>Dulces</button>
+                <button className="btn btn-outline-primary" value ="bebidas" onClick ={btnShowCategory}>Bebidas</button>
+                <button className="btn btn-outline-primary" value ="alcohol"onClick ={btnShowCategory}>Alcohol</button>
 
-</div>
-        <div className="row">
-            {arrayProducts !== undefined ? arrayProducts.filter(product=> product.Name.toLowerCase().substring(0, filtro.objeto.length) === filtro.objeto.toLowerCase()).map((product, index)  => {
-                return (                  
+            </div>
+                <div className="row">
+                    {arrayProducts !== undefined ? arrayProducts.filter(product=> product.Name.toLowerCase().substring(0, filtro.objeto.length) === filtro.objeto.toLowerCase()).map((product, index)  => {
+                    return (                  
                     <div className="col-4 p-3" key={product._id}>
+
                         <div className="card" style={{width: '100%'}}>
-                            <div className="card-img-top">
+                            <div style={{height: '500px'}} align = "center" className="row d-flex align-items-center">
+                                <div class="col-12">
                                  
-                                 <img src={product.Children[0].Imgs[0].Path}  className="  card-img-top imgProduct" alt={product.Children[0].Imgs[0].Alt}/>
+                                     <img style={{width: '100%', maxHeight: '400px'}} src={product.Children[0].Imgs[0].Path}  className="card-img-top imgProduct" alt={product.Children[0].Imgs[0].Alt}/>
+                                 </div>
+
+                                <div class="col-12">
+                                     <h2 className="card-title" >{product.Name}</h2>
+                                 </div>
 
                             </div>
                             <div className="card-body text-center">
-                            <h2 className="card-title" >{product.Name}</h2>
-                            <p className="font-weight-bold">Price: {product.Children[0].Price} $</p>
+                                <p className="font-weight-bold">Price: {product.Children[0].Price} $</p>
                             {footer?
                             <div>
                             
-                            <button className="btn btn-outline-primary ml-5 mr-3" onClick ={()=>Dulce(index)}>Dulces</button>
-                            <button className="btn btn-outline-primary ml-5 mr-3" onClick ={()=>Bebida(index)}>Bebidas</button>
-                            <button className="btn btn-outline-primary ml-5 mr-3" onClick ={()=>Alcohol(index)}>Alcohol</button>
-                            <button class="btn btn-outline-success" onClick ={()=>btnDetail(product)}>Ver mas</button>
-
+                            <div class="row" >
+                                <div class="col-12 p-2">
+                                    <button className="btn btn-outline-primary m-1" onClick ={()=>Dulce(index)}>Dulces</button>
+                                
+                                    <button className="btn btn-outline-primary m-1" onClick ={()=>Bebida(index)}>Bebidas</button>
+                                  
+                                    <button className="btn btn-outline-primary m-1" onClick ={()=>Alcohol(index)}>Alcohol</button>
+                                </div>  
+                                <div class="col-12">
+                                    <button class="btn btn-outline-success" onClick ={()=>btnDetail(product)}>Ver mas</button>
+                                </div>
+                            </div>
                             </div>:console.log(footer)}
                             
                             </div>
